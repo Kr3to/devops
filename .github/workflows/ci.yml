@@ -13,6 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set working directory
+      run: |
+        cd devops
+
     - name: Build Docker image
       run: |
         docker build -t test1 .
@@ -21,7 +25,7 @@ jobs:
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          aquasec/trivy image --format json --output trivy-report.json test1
+          aquasec/trivy image --format json --output ./devops/trivy-report.json test1
   
     - name: Upload Trivy report as artifact
       uses: actions/upload-artifact@v3
