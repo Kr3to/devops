@@ -19,7 +19,9 @@ jobs:
 
     - name: Run Trivy scan
       run: |
-        docker run --rm test1 trivy image --format json --output trivy-report.json test1
+        docker run --rm \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          aquasec/trivy image --format json --output trivy-report.json test1
   
     - name: Upload Trivy report as artifact
       uses: actions/upload-artifact@v3
