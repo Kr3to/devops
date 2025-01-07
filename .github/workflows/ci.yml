@@ -17,6 +17,16 @@ jobs:
       run: |
         docker build -t test1 .
 
+    - name: Run Trivy scan
+      run: |
+        docker run --rm test1 trivy image --format json --output trivy-report.json test1
+  
+    - name: Upload Trivy report as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: trivy-report
+        path: trivy-report.json
+
     - name: Run basic tests
       run: |
         echo "Test"
@@ -24,3 +34,7 @@ jobs:
     - name: Run Flask app inside Docker container
       run: |
         docker run -d -p 5000:5000 test1
+
+    - name: Stop Docker container
+      run: |
+        docker ps -q --filter "ancestor=test1" | xargs docker stop
