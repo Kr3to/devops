@@ -13,16 +13,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y docker.io
-        sudo systemctl enable docker
-        sudo systemctl start docker
-
     - name: Build Docker image
       run: |
-        docker build -t devops-container .
+        docker build -t test1 .
 
     - name: Run basic tests
       run: |
@@ -30,4 +23,4 @@ jobs:
 
     - name: Run Flask app inside Docker container
       run: |
-        docker run -d -p 5000:5000 devops-container
+        docker run -d -p 5000:5000 test1
