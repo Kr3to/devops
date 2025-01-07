@@ -21,17 +21,21 @@ jobs:
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          aquasec/trivy image --format json --output ./trivy-report.json test1
+          aquasec/trivy image --format json --output trivy-report.json test1
   
     - name: Upload Trivy report as artifact
       uses: actions/upload-artifact@v3
       with:
         name: trivy-report
-        path: ./trivy-report.json
+        path: trivy-report.json
 
     - name: Run basic tests
       run: |
         echo "Test"
+
+    - name: Check files and directories
+        run: |
+          ls -la
 
     - name: Run Flask app inside Docker container
       run: |
