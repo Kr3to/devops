@@ -34,8 +34,8 @@ jobs:
         echo "Test"
 
     - name: Check files and directories
-        run: |
-          ls -la
+      run: |
+        ls -la
 
     - name: Run Flask app inside Docker container
       run: |
