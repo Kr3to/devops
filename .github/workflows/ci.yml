@@ -17,7 +17,7 @@ jobs:
       run: |
         docker build -t test1 .
 
-    - name: Run Trivy scan
+    - name: Run Trivy scan 
       run: |
         docker run --rm \
           -v ${{ github.workspace }}:/workdir \
