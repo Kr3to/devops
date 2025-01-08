@@ -21,13 +21,14 @@ jobs:
       run: |
         docker run --rm \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          aquasec/trivy image --format json --output trivy-report.json test1
+          -v ${{ github.workspace }}/devops:/scan \
+          aquasec/trivy image --format json --output /scan/trivy-report.json test1
   
     - name: Upload Trivy report as artifact
       uses: actions/upload-artifact@v3
       with:
         name: trivy-report
-        path: trivy-report.json
+        path: devops/trivy-report.json
 
     - name: Run basic tests
       run: |
