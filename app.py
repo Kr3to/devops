@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello, World!"
+    return "This is a simple Flask app to demonstrate proper functioning of docker container."
 
 @app.route('/contact')
 def contact():
